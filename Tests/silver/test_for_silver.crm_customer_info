@@ -1,0 +1,20 @@
+--Tests for silver.crm_customer_info
+
+--Searching for duplicates primary key
+select 
+cst_id,
+count(*) 
+from  silver.crm_customer_info
+group by cst_id 
+having count(*) > 1 or cst_id is null
+
+--Searching for spaces in f_name,L_name
+select 
+cst_firstname 
+from silver.crm_customer_info
+where cst_firstname != trim(cst_firstname)
+
+select 
+cst_firstname 
+from silver.crm_customer_info
+where cst_lastname != trim(cst_lastname)
